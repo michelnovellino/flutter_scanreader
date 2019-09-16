@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_qr_reader/src/pages/homePage.dart';
+import 'package:flutter_qr_reader/src/pages/mapPage.dart';
 
 void main() => runApp(Run());
 
@@ -15,6 +16,9 @@ class Run extends StatelessWidget {
         '/': (BuildContext context) {
           return HomePage();
         },
+        'map': (BuildContext context){
+          return MapPage();
+        }
       },
       theme: ThemeData(
           primaryColor: Colors.deepPurpleAccent,

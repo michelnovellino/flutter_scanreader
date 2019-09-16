@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:qrcode_reader/qrcode_reader.dart';
+import 'package:flutter_qr_reader/src/bloc/scans.bloc.dart';
+import 'package:flutter_qr_reader/src/models/scan.model.dart';
+/* import 'package:qrcode_reader/qrcode_reader.dart';
+ */
 import 'package:flutter_qr_reader/src/pages/directionsPage.dart';
 import 'package:flutter_qr_reader/src/pages/mapsPage.dart';
 
@@ -9,6 +12,7 @@ class HomePage extends StatefulWidget {
 /* http://michelnovellino.com/
 geo:40.71668710772393,-73.99564161738283
  */class _HomePageState extends State<HomePage> {
+  final scansBloc = new ScansBloc();
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,9 @@ geo:40.71668710772393,-73.99564161738283
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.delete_forever),
-          onPressed: (){},)
+          onPressed: (){
+            scansBloc.deleteAll();
+          },)
         ],
               backgroundColor: Theme.of(context).primaryColor,
       ),
@@ -57,15 +63,17 @@ geo:40.71668710772393,-73.99564161738283
     );
   }
   _scan() async {
-    String response = '';
+    String response = 'geo:40.71668710772393,-73.99564161738283';
 /*     try{
       response = await new QRCodeReader().scan();
     }catch(error) {
       response = error.toString();
     }
-
+ */
     if(response != null) {
-      print('qr >>> $response');
-    } */
+      final scan = ScanModel(value: response );
+      
+      scansBloc.addOne(scan);
+    }
   }
 }
