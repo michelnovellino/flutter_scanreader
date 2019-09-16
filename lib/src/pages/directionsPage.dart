@@ -8,8 +8,9 @@ class DirectionsPage extends StatelessWidget {
   final scansBloc = ScansBloc();
   @override
   Widget build(BuildContext context) {
+     scansBloc.getAll();
     return StreamBuilder<List<ScanModel>>(
-      stream: scansBloc.scansStream,
+      stream: scansBloc.scansStreamHttp,
       builder: (BuildContext context, AsyncSnapshot<List<ScanModel>> snapshot) {
         if (!snapshot.hasData) {
           print(snapshot.data);
